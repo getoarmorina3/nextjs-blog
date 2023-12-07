@@ -1,9 +1,9 @@
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import Providers from "../components/Providers"
-import Navbar from "@/components/Navbar"
-import { Toaster } from "@/components/ui/toaster"
-import { cn } from "@/lib/utils"
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Providers from "../components/Providers";
+import Header from "@/components/Header";
+import { Toaster } from "@/components/ui/toaster";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,17 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-white text-slate-900 antialiased light",
-        inter.className
-      )}
-    >
-      {" "}
-      <body className="min-h-screen pt-12 bg-slate-50 antialiased">
+    <html lang="en" className={cn("antialiased ", inter.className)}>
+      <body className="min-h-screen bg-slate-50">
         <Providers>
-          <Navbar />
+          <Header />
 
           <div className="container max-w-7xl mx-auto h-full pt-12">
             {children}

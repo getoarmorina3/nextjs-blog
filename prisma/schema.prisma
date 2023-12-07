@@ -70,7 +70,7 @@ model VerificationToken {
 model Post {
   id      String @id @default(uuid())
   title   String
-  content String
+  content Json?
   slug    String @unique
 
   createdAt DateTime @default(now())
