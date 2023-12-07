@@ -1,11 +1,10 @@
-import Image from 'next/image'
-
 export default async function Home() {
   return (
-    <main className='h-screen flex justify-center items-center'>
-      <p>
-        <Image src="/vercel.svg" alt="Vercel Logo" width={250} height={250} />
-      </p>
+    <main
+      className="flex justify-center items-center"
+      style={{ height: "calc(100vh - 80px)" }}
+    >
+      <h1 className="text-6xl">Acme Blog</h1>
     </main>
-  )
+  );
 }

@@ -14,17 +14,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en" className={cn("antialiased ", inter.className)}>
-      <body className="min-h-screen bg-slate-50">
+      <body className="min-h-screen">
         <Providers>
           <Header />
 
-          <div className="container max-w-7xl mx-auto h-full pt-12">
+          <div className="container max-w-7xl mx-auto h-full">
             {children}
           </div>
         </Providers>
