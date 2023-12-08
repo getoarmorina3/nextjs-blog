@@ -4,6 +4,7 @@ import { getAuthSession } from "@/lib/auth";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
+import { Icons } from "./ui/icons";
 
 export default async function Header() {
   const session = await getAuthSession();
@@ -32,15 +33,17 @@ export default async function Header() {
         </nav>
         <div className="ml-auto flex items-center space-x-4">
           <Search />
+          <ThemeToggle />
           {/* actions */}
           {session?.user ? (
             <UserNav user={session.user} />
           ) : (
-            <Button variant="outline">
-              <Link href="/sign-in">Sign In</Link>
+            <Button>
+              <Link className="mr-4" href="/sign-in">Get Started</Link>
+              <Icons.rightArrow />
             </Button>
           )}
-          <ThemeToggle />
+          
         </div>
       </div>
     </div>
