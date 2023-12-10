@@ -5,28 +5,9 @@ const t = initTRPC.create()
 const middleware = t.middleware
 
 const isAuth = middleware(async (opts) => {
-    const session = await getAuthSession();
-    const user = session?.user;
+    const { user } = (await getAuthSession()) || {};
 
     if (!user) {
-        throw new TRPCError({ code: 'FORBIDDEN' });
-    }
-
-    return opts.next({
-        ...opts,
-        ctx: {
-            ...opts.ctx,
-            user,
-            userId: user.id
-        },
-    });
-})
-
-const isAdmin = middleware(async (opts) => {
-    const session = await getAuthSession();
-const user = session?.user;
-
-    if (user?.role !== 'ADMIN') {
         throw new TRPCError({ code: 'UNAUTHORIZED' });
     }
 
@@ -35,7 +16,22 @@ const user = session?.user;
         ctx: {
             ...opts.ctx,
             user,
-            role: user.role
+        },
+    });
+})
+
+const isAdmin = middleware(async (opts) => {
+    const { user } = (await getAuthSession()) || {};
+
+    if (user?.role !== 'ADMIN') {
+        throw new TRPCError({ code: 'FORBIDDEN' });
+    }
+
+    return opts.next({
+        ...opts,
+        ctx: {
+            ...opts.ctx,
+            user
         },
     });
 })
