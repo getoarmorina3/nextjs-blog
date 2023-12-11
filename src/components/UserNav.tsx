@@ -43,7 +43,7 @@ export function UserNav({ user }: UserNavProps) {
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link href='/r/create'>New Post</Link>
+          <Link href='/post/create'>New Post</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
