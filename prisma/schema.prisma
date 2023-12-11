@@ -68,7 +68,7 @@ model VerificationToken {
 }
 
 model Post {
-  id      String @id @default(uuid())
+  id      String @id @default(cuid())
   title   String
   content Json?
   slug    String @unique
@@ -85,13 +85,13 @@ model Post {
 }
 
 model Category {
-  id    String @id @default(uuid())
+  id    String @id @default(cuid())
   name  String @unique
   posts Post[]
 }
 
 model Comment {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   name      String
   email     String?
   text      String
