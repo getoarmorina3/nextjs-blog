@@ -20,6 +20,7 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
             referrerPolicy='no-referrer'
             width={32}
             height={32}
+            priority={true}
           />
         </div>
       ) : (
