@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistSans } from 'geist/font/sans';
 import Providers from "../components/Providers";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Acme Blog",
@@ -14,19 +12,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn("antialiased ", inter.className)}>
+    <html
+      lang="en"
+      className={cn("antialiased ", GeistSans.className)}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen">
         <Providers>
           <Header />
 
-          <div className="container max-w-7xl mx-auto h-full">
-            {children}
-          </div>
+          <div className="container max-w-7xl mx-auto h-full">{children}</div>
         </Providers>
         <Toaster />
       </body>
