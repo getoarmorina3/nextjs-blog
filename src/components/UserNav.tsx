@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { User } from "next-auth";
 import { signOut } from "next-auth/react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +11,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "./UserAvatar";
+import {
+  LogOutIcon,
+  SettingsIcon,
+  LayoutDashboardIcon,
+  PlusIcon,
+  LibrarySquare,
+} from "lucide-react";
 
 interface UserNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "name" | "image" | "email"> & { role?: string; };
+  user: Pick<User, "name" | "image" | "email"> & { role?: string };
 }
 
 export function UserNav({ user }: UserNavProps) {
@@ -38,21 +44,34 @@ export function UserNav({ user }: UserNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        {user.role === "ADMIN" && ( // Fixed the problem by adding "role" property check
+        {user.role === "ADMIN" && (
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">Dashboard</Link>
+            <Link href="/dashboard" className="cursor-pointer">
+              <LayoutDashboardIcon className="mr-2 h-4 w-4 inline" />
+              <span>Dashboard</span>
+            </Link>
           </DropdownMenuItem>
         )}
+
         <DropdownMenuItem asChild>
-          <Link href="/my-blogs">My Blogs</Link>
+          <Link href="/blog/create" className="cursor-pointer">
+            <PlusIcon className="mr-2 h-4 w-4 inline" />
+            <span>New Blog</span>
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link href="/blog/create">New Blog</Link>
+          <Link href="/my-blogs" className="cursor-pointer">
+            <LibrarySquare className="mr-2 h-4 w-4 inline" />
+            <span>My Blogs</span>
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <Link href="/settings">Settings</Link>
+          <Link href="/settings" className="cursor-pointer">
+            <SettingsIcon className="mr-2 h-4 w-4 inline" />
+            <span>Settings</span>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
@@ -64,7 +83,8 @@ export function UserNav({ user }: UserNavProps) {
             });
           }}
         >
-          Sign out
+          <LogOutIcon className="mr-2 h-4 w-4" />
+          <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

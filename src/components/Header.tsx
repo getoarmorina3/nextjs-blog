@@ -13,19 +13,19 @@ export default async function Header() {
       <div className="flex h-20 items-center px-12">
         <nav className="flex items-center space-x-4 lg:space-x-6">
           <Link
-            href="/examples/dashboard"
+            href="/"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            Feed
+            Home
           </Link>
           <Link
-            href="/examples/dashboard"
+            href="/popular"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Most Popular
           </Link>
           <Link
-            href="/examples/dashboard"
+            href="/latest"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Latest
@@ -43,7 +43,6 @@ export default async function Header() {
               <Icons.rightArrow />
             </Button>
           )}
-          
         </div>
       </div>
     </div>
