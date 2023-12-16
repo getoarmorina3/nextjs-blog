@@ -1,8 +1,8 @@
 import { publicProcedure, router } from './trpc';
 import z from 'zod';
-import { postRouter } from './post-router';
-import { commentRouter } from './comment-router';
-import { userRouter } from './user-router';
+import { postRouter } from './routers/post-router';
+import { commentRouter } from './routers/comment-router';
+import { userRouter } from './routers/user-router';
 
 export const appRouter = router({
   post: postRouter,

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { protectedProcedure, publicProcedure, router } from "./trpc";
+import { protectedProcedure, publicProcedure, router } from "../trpc";
 import slugify from "slugify";
 import { db } from "@/lib/db";
 
@@ -114,7 +114,7 @@ export const postRouter = router({
           "Unauthorized: You are not the owner of this blog or an admin to delete this"
         );
       }
-  
+
       // Delete the post
       await db.post.delete({
         where: {
