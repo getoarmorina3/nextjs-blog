@@ -20,8 +20,7 @@ export function Options({ slug }: { slug: string }) {
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/">Edit</Link>
         </DropdownMenuItem>
-
-        <DropdownMenuItem asChild className="cursor-pointer">
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="cursor-pointer">
           <DeleteWarning slug={slug} />
         </DropdownMenuItem>
       </DropdownMenuContent>

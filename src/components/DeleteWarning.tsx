@@ -36,7 +36,7 @@ export function DeleteWarning({ slug }: { slug: string }) {
   });
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="text-primary w-full relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+      <AlertDialogTrigger className="text-primary">
         Delete
       </AlertDialogTrigger>
       <AlertDialogContent>
