@@ -1,6 +1,5 @@
 import { Icons } from "@/components/ui/icons";
 import UserAuthForm from "@/components/UserAuthForm";
-import Link from "next/link";
 
 const SignIn = () => {
   return (
@@ -23,19 +22,13 @@ const SignIn = () => {
 
       <p className="px-8 text-center text-sm text-muted-foreground">
         By clicking continue, you agree to our{" "}
-        <Link
-          href="/"
-          className="underline underline-offset-4 hover:text-primary"
-        >
+        <span className="underline underline-offset-4 hover:text-primary">
           Terms of Service
-        </Link>{" "}
+        </span>{" "}
         and{" "}
-        <Link
-          href="/"
-          className="underline underline-offset-4 hover:text-primary"
-        >
+        <span className="underline underline-offset-4 hover:text-primary">
           Privacy Policy
-        </Link>
+        </span>
         .
       </p>
     </div>

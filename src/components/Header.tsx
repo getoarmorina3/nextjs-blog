@@ -1,5 +1,4 @@
 import { UserNav } from "./UserNav";
-import { Search } from "./SearchBar";
 import { getAuthSession } from "@/lib/auth";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -14,32 +13,22 @@ export default async function Header() {
         <nav className="flex items-center space-x-4 lg:space-x-6">
           <Link
             href="/"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="font bold text-md font-medium transition-colors text-primary"
           >
-            Home
-          </Link>
-          <Link
-            href="/popular"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-          >
-            Most Popular
-          </Link>
-          <Link
-            href="/latest"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-          >
-            Latest
+            <Icons.logo className="mr-4 w-8 h-8 inline" />
+            <span>Home</span>
           </Link>
         </nav>
         <div className="ml-auto flex items-center space-x-4">
-          <Search />
           <ThemeToggle />
           {/* actions */}
           {session?.user ? (
             <UserNav user={session.user} />
           ) : (
             <Button>
-              <Link className="mr-4" href="/sign-in">Get Started</Link>
+              <Link className="mr-4" href="/sign-in">
+                Get Started
+              </Link>
               <Icons.rightArrow />
             </Button>
           )}
