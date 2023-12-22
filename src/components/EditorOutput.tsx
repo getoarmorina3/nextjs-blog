@@ -3,6 +3,7 @@
 import { FC } from "react";
 import dynamic from "next/dynamic";
 import CustomCodeRenderer from "./renderers/CustomCodeRenderer";
+import CustomImageRenderer from "./renderers/CustomImageRenderer";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -15,6 +16,7 @@ interface EditorOutputProps {
 
 const renderers = {
   code: CustomCodeRenderer,
+  image: CustomImageRenderer
 };
 
 const style = {

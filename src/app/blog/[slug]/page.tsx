@@ -7,7 +7,6 @@ import Link from "next/link";
 import { UserAvatar } from "@/components/UserAvatar";
 import { Options } from "@/components/Options";
 import CommentsSection from "@/components/comments/CommentSection";
-import { db } from "@/lib/db";
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = await serverTrpc.post.view({ slug });
@@ -65,7 +64,6 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
                     }`}
               </Link>
             )}
-
             <p className="text-muted-foreground">Posted by</p>
             <div className="flex items-center gap-2">
               <UserAvatar

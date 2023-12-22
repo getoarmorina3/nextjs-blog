@@ -5,6 +5,7 @@ import { formatCustomDate } from "@/lib/utils";
 interface PostCardProps {
   title: string;
   slug: string;
+  content: any;
   createdAt: Date;
   user: {
     name: string | null;
@@ -16,16 +17,21 @@ interface PostCardProps {
 export function PostCard({
   title,
   slug,
+  content,
   createdAt,
   user,
   visitCount,
 }: PostCardProps) {
+  const imageUrl = content.blocks.find(
+    (block: { type: string }) => block.type === "image"
+  )?.data.file.url;
   return (
-    <Link
-      className="flex flex-col justify-end items-start border p-6 rounded-lg h-80 transition-colors hover:bg-muted"
-      href={`/blog/${slug}`}
-    >
-      <div className="flex flex-col gap-4 w-full">
+    <Link href={`/blog/${slug}`} className="border rounded-lg">
+      <div
+        style={{ backgroundImage: `url(${imageUrl})` }}
+        className="h-80 hover:bg-muted bg-contain bg-center rounded-t-lg"
+      ></div>
+      <div className="flex flex-col gap-4 w-full p-6">
         <h2 className="font-bold text-2xl break-words">{title}</h2>
         <div className="flex justify-between">
           <div className="flex justify-start gap-4 items-center">

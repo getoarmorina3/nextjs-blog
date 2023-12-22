@@ -11,6 +11,7 @@ const CommentsSection = async ({ postId }: CommentsSectionProps) => {
   return (
     <div className="flex flex-col gap-y-4 mt-4" id="comments">
       <hr className="w-full h-px mt-6" />
+      <h2 className="text-xl font-bold mt-6 mb-4">Comments</h2>
       <div className="flex flex-col items-start justify-start mb-6">
         {comments.map((comment) => (
           <div key={comment.id} className="flex flex-col gap-y-4 border-b rounded-lg p-8 w-full">

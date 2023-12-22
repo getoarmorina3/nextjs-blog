@@ -8,6 +8,7 @@ import { toast } from "@/components/ui/use-toast";
 import { PostCreationRequest } from "@/lib/validators/post";
 import { trpc } from "@/trpc/client";
 import { SelectCategory } from "./SelectCategory";
+import { uploadFiles } from "@/lib/uploadthing";
 
 interface EditorState {
   title: string;
@@ -56,6 +57,10 @@ export const Editor: React.FC = () => {
     const List = (await import("@editorjs/list")).default;
     const Code = (await import("@editorjs/code")).default;
     const InlineCode = (await import("@editorjs/inline-code")).default;
+    const Embed = (await import("@editorjs/embed")).default;
+    const ImageTool = (await import("@editorjs/image")).default;
+    const LinkTool = (await import("@editorjs/link")).default;
+
 
     if (!ref.current) {
       const editor = new EditorJS({
@@ -71,6 +76,31 @@ export const Editor: React.FC = () => {
           list: List,
           code: Code,
           inlineCode: InlineCode,
+          linkTool: {
+            class: LinkTool,
+            config: {
+              endpoint: "/api/link",
+            },
+          },
+          embed: Embed,
+          image: {
+            class: ImageTool,
+            config: {
+              uploader: {
+                async uploadByFile(file: File) {
+                  const [res] = await uploadFiles("imageUploader", {
+                    files: [file],
+                  });
+                  return {
+                    success: 1,
+                    file: {
+                      url: res.url,
+                    },
+                  };
+                },
+              },
+            },
+          },
         },
       });
     }

@@ -23,20 +23,20 @@ export function DeleteWarning({ slug }: { slug: string }) {
       router.refresh();
 
       return toast({
-        description: "Your Blog has been deleted.",
+        description: "Blog has been deleted.",
       });
     },
     onError: () => {
       return toast({
         title: "Something went wrong.",
-        description: "Your Blog was not deleted. Please try again.",
+        description: "Blog was not deleted. Please try again.",
         variant: "destructive",
       });
     },
   });
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="text-primary">
+      <AlertDialogTrigger className="w-full text-left">
         Delete
       </AlertDialogTrigger>
       <AlertDialogContent>

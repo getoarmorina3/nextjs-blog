@@ -27,7 +27,7 @@ export const postRouter = router({
     }),
   mostPopular: publicProcedure.query(() => {
     return db.post.findMany({
-      take: 2,
+      take: 4,
       orderBy: {
         visitCount: "desc",
       },
