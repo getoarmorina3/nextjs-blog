@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserAvatar } from "../UserAvatar";
+import { UserAvatar } from "../user/UserAvatar";
 import { formatCustomDate } from "@/lib/utils";
 import { PostProps } from "@/types";
 

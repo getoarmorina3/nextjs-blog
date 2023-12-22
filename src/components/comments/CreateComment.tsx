@@ -23,9 +23,20 @@ const CreateComment: FC<CreateCommentProps> = ({ postId }) => {
   const { mutate: comment, isLoading } = trpc.comment.create.useMutation({
     onError: (error) => {
       if (error?.data?.zodError?.fieldErrors) {
+        const fieldErrors = error.data.zodError.fieldErrors;
+        const errorMessages = Object.values(fieldErrors).flatMap(
+          (messages) => messages
+        );
+
         return toast({
           title: "Comment was not posted.",
-          description: `${JSON.stringify(error?.data?.zodError?.fieldErrors)}`,
+          description: (
+            <ul>
+              {errorMessages.map((message, index) => (
+                <li key={index}>{message}</li>
+              ))}
+            </ul>
+          ),
           variant: "destructive",
         });
       }
@@ -62,6 +73,7 @@ const CreateComment: FC<CreateCommentProps> = ({ postId }) => {
       <Label htmlFor="email">Your email</Label>
       <div className="my-2">
         <Input
+          type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

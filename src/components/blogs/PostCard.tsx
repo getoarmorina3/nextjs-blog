@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserAvatar } from "../UserAvatar";
+import { UserAvatar } from "../user/UserAvatar";
 import { formatCustomDate } from "@/lib/utils";
 
 interface PostCardProps {
@@ -29,7 +29,7 @@ export function PostCard({
     <Link href={`/blog/${slug}`} className="border rounded-lg">
       <div
         style={{ backgroundImage: `url(${imageUrl})` }}
-        className="h-80 hover:bg-muted bg-contain bg-center rounded-t-lg"
+        className="h-80 hover:bg-muted bg-cover bg-center rounded-t-lg"
       ></div>
       <div className="flex flex-col gap-4 w-full p-6">
         <h2 className="font-bold text-2xl break-words">{title}</h2>

@@ -36,7 +36,7 @@ export const commentRouter = router({
           .string()
           .min(3, { message: "Name must be at least 3 characters long" })
           .max(32, { message: "Name must not exceed 32 characters" }),
-        email: z.string().email().optional(),
+        email: z.string().optional(),
         text: z
           .string()
           .min(3, { message: "Comment must be at least 3 characters long" })

@@ -1,4 +1,4 @@
-import { UserNav } from "./UserNav";
+import { UserNav } from "./user/UserNav";
 import { getAuthSession } from "@/lib/auth";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -19,11 +19,16 @@ export default async function Header() {
             <span>Home</span>
           </Link>
         </nav>
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto flex items-center space-x-2">
           <ThemeToggle />
           {/* actions */}
           {session?.user ? (
-            <UserNav user={session.user} />
+            <>
+              <Button variant={"link"}>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              <UserNav user={session.user} />
+            </>
           ) : (
             <Button>
               <Link className="mr-4" href="/sign-in">

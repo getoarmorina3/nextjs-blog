@@ -44,26 +44,10 @@ export function UserNav({ user }: UserNavProps) {
           </div>
         </div>
         <DropdownMenuSeparator />
-        {user.role === "ADMIN" && (
-          <DropdownMenuItem asChild>
-            <Link href="/dashboard" className="cursor-pointer">
-              <LayoutDashboardIcon className="mr-2 h-4 w-4 inline" />
-              <span>Dashboard</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
         <DropdownMenuItem asChild>
           <Link href="/blog/create" className="cursor-pointer">
             <PlusIcon className="mr-2 h-4 w-4 inline" />
             <span>New Blog</span>
-          </Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild>
-          <Link href="/my-blogs" className="cursor-pointer">
-            <Library className="mr-2 h-4 w-4 inline" />
-            <span>My Blogs</span>
           </Link>
         </DropdownMenuItem>
 

@@ -16,7 +16,7 @@ import { commentColmns } from "@/components/dashboard/table-columns/comment-colu
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Example dashboard app built using the components.",
+  description: "Dashboard to manage your data for the Acme Blog.",
 };
 
 export default async function DashboardPage() {
@@ -30,7 +30,7 @@ export default async function DashboardPage() {
       <div className="flex-col md:flex mt-8 border rounded-lg">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Admin's Dashboard</h2>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>

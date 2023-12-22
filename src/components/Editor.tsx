@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useRef, useState, useEffect, useCallback } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { toast } from "@/components/ui/use-toast";
-import { PostCreationRequest } from "@/lib/validators/post";
 import { trpc } from "@/trpc/client";
 import { SelectCategory } from "./SelectCategory";
 import { uploadFiles } from "@/lib/uploadthing";
@@ -37,9 +36,20 @@ export const Editor: React.FC = () => {
     },
     onError: (error) => {
       if (error?.data?.zodError?.fieldErrors) {
+        const fieldErrors = error.data.zodError.fieldErrors;
+        const errorMessages = Object.values(fieldErrors).flatMap(
+          (messages) => messages
+        );
+
         return toast({
           title: "Blog was not published.",
-          description: `${JSON.stringify(error?.data?.zodError?.fieldErrors)}`,
+          description: (
+            <ul>
+              {errorMessages.map((message, index) => (
+                <li key={index}>{message}</li>
+              ))}
+            </ul>
+          ),
           variant: "destructive",
         });
       }
@@ -60,7 +70,6 @@ export const Editor: React.FC = () => {
     const Embed = (await import("@editorjs/embed")).default;
     const ImageTool = (await import("@editorjs/image")).default;
     const LinkTool = (await import("@editorjs/link")).default;
-
 
     if (!ref.current) {
       const editor = new EditorJS({
@@ -134,7 +143,7 @@ export const Editor: React.FC = () => {
   const onSubmit = async () => {
     const blocks = await ref.current?.save();
 
-    const payload: PostCreationRequest = {
+    const payload = {
       title: editorState.title,
       content: blocks,
       categoryId: selectedCategoryId,
@@ -184,7 +193,6 @@ export const Editor: React.FC = () => {
             </p>
             <SelectCategory
               onSelectCategory={(categoryId) => {
-                console.log("Selected Category ID:", categoryId);
                 setSelectedCategoryId(categoryId);
               }}
             />

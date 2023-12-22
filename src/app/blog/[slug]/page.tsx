@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { formatCustomDate } from "@/lib/utils";
 import { getAuthSession } from "@/lib/auth";
 import Link from "next/link";
-import { UserAvatar } from "@/components/UserAvatar";
+import { UserAvatar } from "@/components/user/UserAvatar";
 import { Options } from "@/components/Options";
 import CommentsSection from "@/components/comments/CommentSection";
 
