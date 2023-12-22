@@ -16,7 +16,7 @@ import {
   SettingsIcon,
   LayoutDashboardIcon,
   PlusIcon,
-  LibrarySquare,
+  Library,
 } from "lucide-react";
 
 interface UserNavProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -62,7 +62,7 @@ export function UserNav({ user }: UserNavProps) {
 
         <DropdownMenuItem asChild>
           <Link href="/my-blogs" className="cursor-pointer">
-            <LibrarySquare className="mr-2 h-4 w-4 inline" />
+            <Library className="mr-2 h-4 w-4 inline" />
             <span>My Blogs</span>
           </Link>
         </DropdownMenuItem>
