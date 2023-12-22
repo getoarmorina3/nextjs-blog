@@ -7,6 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { toast } from "@/components/ui/use-toast";
 import { PostCreationRequest } from "@/lib/validators/post";
 import { trpc } from "@/trpc/client";
+import { SelectCategory } from "./SelectCategory";
 
 interface EditorState {
   title: string;
@@ -18,11 +19,11 @@ export const Editor: React.FC = () => {
     title: "",
     content: null,
   });
-
   const ref = useRef<EditorJS>();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
   const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
 
   const { mutate: createPost } = trpc.post.create.useMutation({
     onSuccess: () => {
@@ -30,13 +31,20 @@ export const Editor: React.FC = () => {
       router.refresh();
 
       return toast({
-        description: "Your post has been published.",
+        description: "Your blog has been published.",
       });
     },
-    onError: () => {
+    onError: (error) => {
+      if (error?.data?.zodError?.fieldErrors) {
+        return toast({
+          title: "Blog was not published.",
+          description: `${JSON.stringify(error?.data?.zodError?.fieldErrors)}`,
+          variant: "destructive",
+        });
+      }
       return toast({
         title: "Something went wrong.",
-        description: "Your post was not published. Please try again.",
+        description: "Your blog could not be published. Please try again.",
         variant: "destructive",
       });
     },
@@ -99,6 +107,7 @@ export const Editor: React.FC = () => {
     const payload: PostCreationRequest = {
       title: editorState.title,
       content: blocks,
+      categoryId: selectedCategoryId,
     };
 
     createPost(payload);
@@ -109,7 +118,7 @@ export const Editor: React.FC = () => {
   }
 
   return (
-    <div className="w-full p-4 rounded-lg border">
+    <div className="w-full flex justify-center p-4 rounded-lg">
       <form
         id="post-form"
         className="w-fit"
@@ -134,14 +143,22 @@ export const Editor: React.FC = () => {
               }))
             }
           />
-          <div id="editor" className="min-h-[500px]" />
-          <p className="text-sm">
-            Use{" "}
-            <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
-              Tab
-            </kbd>{" "}
-            to open the command menu.
-          </p>
+          <div id="editor" className="text-left min-h-[500px]" />
+          <div className="flex justify-between items-center">
+            <p className="text-sm">
+              Use{" "}
+              <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
+                Tab
+              </kbd>{" "}
+              to open the command menu.
+            </p>
+            <SelectCategory
+              onSelectCategory={(categoryId) => {
+                console.log("Selected Category ID:", categoryId);
+                setSelectedCategoryId(categoryId);
+              }}
+            />
+          </div>
         </div>
       </form>
     </div>

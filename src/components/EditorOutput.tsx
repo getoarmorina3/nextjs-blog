@@ -2,6 +2,7 @@
 
 import { FC } from "react";
 import dynamic from "next/dynamic";
+import CustomCodeRenderer from "./renderers/CustomCodeRenderer";
 
 const Output = dynamic(
   async () => (await import("editorjs-react-renderer")).default,
@@ -12,6 +13,10 @@ interface EditorOutputProps {
   content: any;
 }
 
+const renderers = {
+  code: CustomCodeRenderer,
+};
+
 const style = {
   paragraph: {
     fontSize: "1.125rem",
@@ -21,7 +26,7 @@ const style = {
 };
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
-  return <Output style={style} data={content} />;
+  return <Output style={style} data={content} renderers={renderers} />;
 };
 
 export default EditorOutput;

@@ -6,6 +6,8 @@ import { getAuthSession } from "@/lib/auth";
 import Link from "next/link";
 import { UserAvatar } from "@/components/UserAvatar";
 import { Options } from "@/components/Options";
+import CommentsSection from "@/components/comments/CommentSection";
+import { db } from "@/lib/db";
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = await serverTrpc.post.view({ slug });
@@ -45,9 +47,25 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
       <div className="px-6 grid grid-cols-[1fr_340px]">
         <div className="pr-20 pb-20 border-r">
           <EditorOutput content={post?.content} />
+          <div></div>
+          {/* Comments */}
+          {post && <CommentsSection postId={post.id} />}
         </div>
         <div className="relative">
           <div className="flex flex-col gap-4 px-12 pb-12 sticky top-8">
+            {post?.Comment && (
+              <Link
+                className="text-muted-foreground hover:text-primary transition-colors hover:underline"
+                href={`#comments`}
+              >
+                {post.Comment.length === 0
+                  ? "Be the first to comment"
+                  : `${post.Comment.length} ${
+                      post.Comment.length === 1 ? "Comment" : "Comments"
+                    }`}
+              </Link>
+            )}
+
             <p className="text-muted-foreground">Posted by</p>
             <div className="flex items-center gap-2">
               <UserAvatar
