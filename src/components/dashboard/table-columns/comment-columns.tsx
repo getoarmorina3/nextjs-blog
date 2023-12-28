@@ -1,11 +1,8 @@
 "use client";
 
-import { toast } from "@/components/ui/use-toast";
-import { trpc } from "@/trpc/client";
 import { Post } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { useRouter } from "next/navigation";
-import { Edit2, Trash2 } from "lucide-react";
+import { DeleteComment } from "./actions";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -39,37 +36,11 @@ export const commentColmns: ColumnDef<Comment>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const user = row.original;
-      const router = useRouter();
-
-      const { mutate: deleteComment } = trpc.comment.delete.useMutation({
-        onError: () => {
-          return toast({
-            title: "Something went wrong.",
-            description: "Comment could not be deleted. Please try again.",
-            variant: "destructive",
-          });
-        },
-        onSuccess: () => {
-          router.refresh();
-    
-          return toast({
-            description: "Comment has been deleted.",
-          });
-        },
-      })
-
-      const id = user.id;
+      const comment = row.original;
 
       return (
         <div className="flex justify-center gap-3">
-          <div
-            onClick={() => deleteComment({id})}
-            className="border rounded-lg p-2 transition-colors cursor-pointer hover:bg-muted"
-          >
-            <Trash2 className="h-5 w-5">
-            </Trash2>
-          </div>
+          <DeleteComment id={comment.id} />
         </div>
       );
     },

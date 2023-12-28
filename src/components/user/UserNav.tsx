@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "./UserAvatar";
 import { LogOutIcon, SettingsIcon, PlusIcon } from "lucide-react";
-import { ThemeToggle } from "../ThemeToggle";
 
 interface UserNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email"> & { role?: string };

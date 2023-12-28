@@ -17,7 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Edit2, Plus } from "lucide-react";
+import { Edit2, Plus, Trash2 } from "lucide-react";
 
 export default function AddCategory() {
   const router = useRouter();
@@ -153,6 +153,90 @@ export function UpdateCategory({ id }: { id: string }) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+export function DeleteUser({ id }: { id: string }) {
+  const router = useRouter();
+  const { mutate: deleteUser } = trpc.user.delete.useMutation({
+    onError: () => {
+      return toast({
+        title: "Something went wrong.",
+        description: "User could not be deleted. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.refresh();
+      return toast({
+        description: "User has been deleted.",
+      });
+    },
+  });
+
+  return (
+    <div
+      onClick={() => deleteUser({ id })}
+      className="border rounded-lg p-2 transition-colors cursor-pointer hover:bg-muted"
+    >
+      <Trash2 className="h-5 w-5"></Trash2>
+    </div>
+  );
+}
+
+export function DeleteComment({ id }: { id: string }) {
+  const router = useRouter();
+  const { mutate: deleteComment } = trpc.comment.delete.useMutation({
+    onError: () => {
+      return toast({
+        title: "Something went wrong.",
+        description: "Comment could not be deleted. Please try again.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.refresh();
+      return toast({
+        description: "Comment has been deleted.",
+      });
+    },
+  });
+
+  return (
+    <div
+      onClick={() => deleteComment({ id })}
+      className="border rounded-lg p-2 transition-colors cursor-pointer hover:bg-muted"
+    >
+      <Trash2 className="h-5 w-5"></Trash2>
+    </div>
+  );
+}
+
+export function DeleteCategory({ id }: { id: string }) {
+  const router = useRouter();
+  const { mutate: deleteCategory } = trpc.category.delete.useMutation({
+    onError: () => {
+      return toast({
+        title: "Something went wrong.",
+        description:
+          "Make sure you don't have any posts in this category before deleting it.",
+        variant: "destructive",
+      });
+    },
+    onSuccess: () => {
+      router.refresh();
+      return toast({
+        description: "Category has been deleted.",
+      });
+    },
+  });
+  return (
+    <div
+      onClick={() => deleteCategory({ id })}
+      className="border rounded-lg p-2 transition-colors cursor-pointer hover:bg-muted"
+    >
+      <Trash2 className="h-5 w-5"></Trash2>
     </div>
   );
 }

@@ -12,7 +12,7 @@ import { postColumns } from "@/components/dashboard/table-columns/blog-columns";
 import { categoryColumns } from "@/components/dashboard/table-columns/category-columns";
 import { serverTrpc } from "@/trpc/server";
 import { commentColmns } from "@/components/dashboard/table-columns/comment-columns";
-import AddCategory from "@/components/dashboard/table-columns/category-actions";
+import AddCategory from "@/components/dashboard/table-columns/actions";
 
 export const metadata: Metadata = {
   title: "Dashboard",
