@@ -8,7 +8,7 @@ import { Categories } from "@/types";
 export function PostsNav({ categories }: { categories: Categories[] }) {
   const pathname = usePathname();
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="hidden md:flex flex-wrap gap-y-8 gap-x-4 justify-center md:gap-4">
       <Link
         className={clsx(
           "relative text-sm font-medium text-muted-foreground transition-colors hover:text-primary",

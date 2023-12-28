@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
+import { GeistSans } from "geist/font/sans";
 import Providers from "../components/Providers";
 import Header from "@/components/Header";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Acme Blog",
@@ -22,11 +23,14 @@ export default function RootLayout({
       className={cn("antialiased ", GeistSans.className)}
       suppressHydrationWarning
     >
-      <body className="min-h-screen">
+      <body>
         <Providers>
           <Header />
 
-          <div className="container max-w-7xl mx-auto h-full">{children}</div>
+          <div className="min-h-screen max-w-[52rem] mx-auto px-4 sm:px-6 md:px-8 xl:px-12 lg:max-w-7xl">
+            {children}
+          </div>
+          <Footer />
         </Providers>
         <Toaster />
       </body>

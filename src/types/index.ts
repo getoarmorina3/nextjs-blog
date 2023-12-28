@@ -1,3 +1,5 @@
+import { JsonValue } from "@prisma/client/runtime/library";
+
 export interface Categories {
   id: string;
   name: string;
@@ -19,4 +21,5 @@ export interface PostProps {
     name: string;
     slug: string;
   };
+  content: any;
 }

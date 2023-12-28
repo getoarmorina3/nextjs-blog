@@ -11,13 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "./UserAvatar";
-import {
-  LogOutIcon,
-  SettingsIcon,
-  LayoutDashboardIcon,
-  PlusIcon,
-  Library,
-} from "lucide-react";
+import { LogOutIcon, SettingsIcon, PlusIcon } from "lucide-react";
+import { ThemeToggle } from "../ThemeToggle";
 
 interface UserNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email"> & { role?: string };
@@ -29,7 +24,7 @@ export function UserNav({ user }: UserNavProps) {
       <DropdownMenuTrigger>
         <UserAvatar
           user={{ name: user.name || null, image: user.image || null }}
-          className="h-8 w-8"
+          className="h-8 w-8 border"
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
@@ -50,7 +45,7 @@ export function UserNav({ user }: UserNavProps) {
             <span>New Blog</span>
           </Link>
         </DropdownMenuItem>
-
+        
         <DropdownMenuItem asChild>
           <Link href="/settings" className="cursor-pointer">
             <SettingsIcon className="mr-2 h-4 w-4 inline" />

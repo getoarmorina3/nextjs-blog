@@ -24,10 +24,14 @@
     --input: 240 5.9% 90%;
     --ring: 240 5.9% 10%;
     --radius: 0.5rem;
+    --gradient-from: 247 185 85 / 0.15;
+    --gradient-to: 255 0 128 / 0.15;
+    --bg-gradient-from: 247 185 85;
+    --bg-gradient-to: 255 0 128;
   }
- 
+
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
     --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -46,6 +50,10 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
+    --gradient-from: 247 185 85 / 0.3;
+    --gradient-to: 255 0 128 / 0.3;
+    --bg-gradient-from: 247 185 85;
+    --bg-gradient-to: 255 0 128;
   }
 }
 

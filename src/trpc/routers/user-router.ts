@@ -14,18 +14,60 @@ export const userRouter = router({
     .input(
       z.object({
         name: z.string().min(3).max(32),
-        id: z.string(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+      const id = ctx.user?.id;
       const payload = await db.user.update({
         where: {
-          id: input.id,
+          id,
         },
         data: {
           name: input.name,
         },
       });
       return payload;
+    }),
+  // delete a user by id only the admin can delete
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Find the post by ID
+      const user = await db.user.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      // Check if the current user is an admin
+      if (ctx.user.role !== "ADMIN") {
+        throw new Error(
+          "Unauthorized: You are not an admin to delete this"
+        );
+      }
+
+      // Check if the user is an admin
+      if (user.role === "ADMIN") {
+        throw new Error(
+          "Unauthorized: You cannot delete an admin"
+        );
+      }
+
+      // Delete the user
+      await db.user.delete({
+        where: {
+          id: input.id,
+        },
+      });
+
+      return true;
     }),
 });

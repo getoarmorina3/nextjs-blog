@@ -5,7 +5,7 @@ const SignIn = () => {
   return (
     <div className="container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px] rounded-lg border py-12 px-8">
       <div className="flex flex-col space-y-2 text-center">
-        <Icons.logo className="mx-auto h-6 w-6" />
+        <Icons.vercel className="mx-auto h-6 w-6" />
         <h1 className="text-2xl font-semibold tracking-tight">Welcome</h1>
       </div>
       <div className="relative">

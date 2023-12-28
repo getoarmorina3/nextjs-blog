@@ -1,36 +1,43 @@
 import { serverTrpc } from "@/trpc/server";
-import { Post } from "@/components/blogs/Post";
 import { PostsNav } from "@/components/blogs/PostsNav";
+import { Latest } from "@/components/blogs/Latest";
+import Pagination from "@/components/ui/pagination";
+import { Suspense } from "react";
+import { PostsSkeleton } from "@/components/Skeletons";
 
 const CategoryPage = async ({
   params: { slug },
+  searchParams,
 }: {
   params: { slug: string };
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 }) => {
-  const category = await serverTrpc.category.view({ slug });
   const categories = await serverTrpc.category.listAll();
+  const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
+  const totalPages = await serverTrpc.post.fetchPostsPages({
+    query,
+    category: slug,
+  });
+
   return (
-    <main className="container mx-auto my-16">
+    <div className="mb-16 md:my-16">
       <PostsNav categories={categories} />
-      <h1 className="text-4xl font-bold my-16">{category?.name}</h1>
-      <div className="grid grid-cols-2 gap-16 mt-8">
-        {category &&
-          category.posts.map((post) => (
-            <Post
-              key={post.id}
-              slug={post.slug}
-              title={post.title}
-              createdAt={post.createdAt}
-              user={{
-                name: post.author?.name,
-                image: post.author?.image,
-              }}
-              visitCount={post.visitCount}
-              category={category}
-            />
-          ))}
+      <Suspense key={query + currentPage} fallback={<PostsSkeleton />}>
+        <Latest
+          query={query}
+          currentPage={currentPage}
+          categories={categories}
+          category={slug}
+        />
+      </Suspense>
+      <div className="mt-16 flex w-full justify-center">
+        <Pagination totalPages={totalPages} />
       </div>
-    </main>
+    </div>
   );
 };
 

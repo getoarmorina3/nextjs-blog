@@ -1,16 +1,17 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router, protectedProcedure } from "../trpc";
 import { db } from "@/lib/db";
 
 export const commentRouter = router({
   // list all comments
-  listAll: publicProcedure.query(() => {
-    return db.comment.findMany({
-      include: {
-        post: true,
-      },
-    });
-  }),
+  listAll: publicProcedure
+    .query(() => {
+      return db.comment.findMany({
+        include: {
+          post: true,
+        },
+      });
+    }),
   // view all comments for a specific post
   viewAll: publicProcedure
     .input(
@@ -55,5 +56,49 @@ export const commentRouter = router({
         },
       });
       return payload;
+    }),
+  // delete a comment by id only the admin and the blog owner can delete the comment
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { id, role } = ctx!.user;
+
+      // Find the comment by ID
+      const comment = await db.comment.findUnique({
+        where: {
+          id: input.id,
+        },
+        select: {
+          post: {
+            select: {
+              authorId: true,
+            }
+          }
+        }
+      });
+
+      if (!comment) {
+        throw new Error("Comment not found");
+      }
+
+      // Check if the current user is the owner of the post or is an admin
+      if (role !== "ADMIN" && comment.post.authorId !== id) {
+        throw new Error(
+          "Unauthorized: You are not the owner of this blog or an admin to delete this"
+        );
+      }
+
+      // Delete the comment
+      await db.comment.delete({
+        where: {
+          id: input.id,
+        },
+      });
+
+      return true;
     }),
 });

@@ -17,7 +17,6 @@ interface EditorOutputProps {
 const renderers = {
   code: CustomCodeRenderer,
   image: CustomImageRenderer,
-
 };
 
 const style = {
@@ -28,28 +27,28 @@ const style = {
   },
   header: {
     h1: {
-      fontWeight: 'bold',
-      fontSize: '2.25rem',
+      fontWeight: "bold",
+      fontSize: "2.25rem",
     },
     h2: {
-      fontWeight: 'bold',
-      fontSize: '2rem',
+      fontWeight: "bold",
+      fontSize: "2rem",
     },
     h3: {
-      fontWeight: 'bold',
-      fontSize: '1.75rem',
+      fontWeight: "bold",
+      fontSize: "1.75rem",
     },
     h4: {
-      fontWeight: 'bold',
-      fontSize: '1.5rem',
+      fontWeight: "bold",
+      fontSize: "1.5rem",
     },
     h5: {
-      fontWeight: 'bold',
-      fontSize: '1.25rem',
+      fontWeight: "bold",
+      fontSize: "1.25rem",
     },
     h6: {
-      fontWeight: 'bold',
-      fontSize: '1rem',
+      fontWeight: "bold",
+      fontSize: "1rem",
     },
   },
 };

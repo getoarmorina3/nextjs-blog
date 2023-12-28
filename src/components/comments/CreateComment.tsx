@@ -60,25 +60,29 @@ const CreateComment: FC<CreateCommentProps> = ({ postId }) => {
 
   return (
     <div className="grid w-full gap-1.5">
-      <Label htmlFor="name">Your name</Label>
-      <div className="my-2">
-        <Input
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="What is your name?"
-          required
-        />
-      </div>
-      <Label htmlFor="email">Your email</Label>
-      <div className="my-2">
-        <Input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Type here your email (optional)"
-        />
+      <div className="flex just my-2 items-center gap-8">
+        <div className="w-full">
+          <Label htmlFor="name">Your name</Label>
+          <Input
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="What is your name?"
+            required
+            className="focus-visible:ring-offset-0 focus-visible:ring-muted my-2"
+          />
+        </div>
+        <div className="w-full">
+          <Label htmlFor="email">Your email</Label>
+          <Input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Type here your email (optional)"
+            className="focus-visible:ring-offset-0 focus-visible:ring-muted my-2"
+          />
+        </div>
       </div>
       <Label htmlFor="comment">Your comment</Label>
       <div className="my-2">
@@ -86,17 +90,18 @@ const CreateComment: FC<CreateCommentProps> = ({ postId }) => {
           id="comment"
           value={text}
           onChange={(e) => setText(e.target.value)}
-          rows={1}
+          rows={2}
           placeholder="What are your thoughts?"
+          className="focus-visible:ring-offset-0 focus-visible:ring-muted resize-none"
         />
 
-        <div className="mt-2 flex justify-end">
+        <div className="mt-4 flex justify-end">
           <Button
+            variant={"outline"}
             isLoading={isLoading}
-            disabled={text.length === 0}
             onClick={() => comment({ postId, text, email, name })}
           >
-            Post
+            Post Comment
           </Button>
         </div>
       </div>

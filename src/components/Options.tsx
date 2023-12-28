@@ -17,9 +17,6 @@ export function Options({ slug }: { slug: string }) {
         <MoreVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem asChild className="cursor-pointer">
-          <Link href="/">Edit</Link>
-        </DropdownMenuItem>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="cursor-pointer">
           <DeleteWarning slug={slug} />
         </DropdownMenuItem>
