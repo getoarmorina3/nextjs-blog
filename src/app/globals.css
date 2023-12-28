@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -25,10 +24,10 @@
     --input: 220 13% 91%;
     --ring: 224 71.4% 4.1%;
     --radius: 0.5rem;
-    --gradient-from: 247 185 85 / 0.15;
-    --gradient-to: 255 0 128 / 0.15;
-    --bg-gradient-from: 247 185 85;
-    --bg-gradient-to: 255 0 128;
+    --gradient-from: 0 112 243 / 0.15;
+    --gradient-to: 248 28 229 / 0.15;
+    --bg-gradient-from: 0 112 243;
+    --bg-gradient-to: 248 28 229;
     --link-color: #0070f3;
 
   }
@@ -53,10 +52,10 @@
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 216 12.2% 83.9%;
-    --gradient-from: 247 185 85 / 0.3;
-    --gradient-to: 255 0 128 / 0.3;
-    --bg-gradient-from: 247 185 85;
-    --bg-gradient-to: 255 0 128;
+    --gradient-from: 0 112 243 / 0.3;
+    --gradient-to: 248 28 229 / 0.3;
+    --bg-gradient-from: 0 112 243;
+    --bg-gradient-to: 248 28 229;
     --link-color: #3291ff;
 
   }
@@ -77,7 +76,7 @@ p a {
 }
 
 p a:hover {
-  background-image: linear-gradient(var(--link-color),var(--link-color));
+  background-image: linear-gradient(var(--link-color), var(--link-color));
   background-size: 100% 1px;
   background-position: 0 100%;
   background-repeat: no-repeat;
