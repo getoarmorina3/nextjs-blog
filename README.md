@@ -5,11 +5,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First to get started clone the repository:
 
 ```bash
- git clone -b starter-code https://github.com/getoarmorina3/nextjs-blog.git
+ git clone https://github.com/getoarmorina3/nextjs-blog.git
 ```
 
 and copy these .env.example variables into a separate .env file:
 ```bash
+
 # This file contains all the environment variables required for the application to run
 
 # The URL of your Next.js application (optionally) recommended to use localhost for development
@@ -35,7 +36,7 @@ UPLOADTHING_SECRET=
 UPLOADTHING_APP_ID=
 ```
 
-finally start the development server
+on your terminal finally start the development server
 ```bash
 # To install dependencies, run
 npm install
