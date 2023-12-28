@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await serverTrpc.post.view({ slug });
 
   return {
-    title: post?.title || "Not Found",
+    title: post?.title || undefined,
   };  
 }
 
