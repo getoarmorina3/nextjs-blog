@@ -37,7 +37,7 @@ export function Post({
         </Link>
         <div className="flex flex-col gap-4">
           <Link className="flex flex-col gap-4" href={`/blog/${slug}`}>
-            <h2 className="font-bold text-xl md:text-2xl break-words">
+            <h2 className="font-bold text-[1.25rem] leading-[1.5rem] tracking-tight md:text-2xl break-words">
               {title}
             </h2>
             <p className="text-muted-foreground line-clamp-2">
