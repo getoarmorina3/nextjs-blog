@@ -60,7 +60,7 @@ const CreateComment: FC<CreateCommentProps> = ({ postId }) => {
 
   return (
     <div className="grid w-full gap-1.5">
-      <div className="flex just my-2 items-center gap-8">
+      <div className="flex flex-col md:flex-row just my-2 items-center gap-4 md:gap-8">
         <div className="w-full">
           <Label htmlFor="name">Your name</Label>
           <Input
