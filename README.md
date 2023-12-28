@@ -45,10 +45,10 @@ npm install
 npx prisma generate
 npx prisma migrate dev
 
-# To build the app, use
+# To build the app, use (recommended good for debugging)
 npm run build
 
-# Finally, run the app by typing
+# To run the app, use
 npm run dev
 ```
 
