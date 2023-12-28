@@ -1,19 +1,14 @@
 import { serverTrpc } from "@/trpc/server";
 import { Post } from "@/components/blogs/PostCard";
-import { Search } from "../Search";
-import { Categories } from "@/types";
-import { MobileNav } from "../MobileNavDrawer";
 
 export async function Latest({
   query,
   currentPage,
   category,
-  categories,
 }: {
   query: string;
   currentPage: number;
   category?: string;
-  categories: Categories[];
 }) {
   const posts = await serverTrpc.post.fetchFilteredPosts({
     query,
@@ -23,18 +18,6 @@ export async function Latest({
 
   return (
     <>
-      <div className="flex flex-col gap-8 mb-8 md:mb-16 justify-center items-center">
-        <h1
-          id="latest"
-          className="text-center text-4xl font-bold mt-8 md:mt-16"
-        >
-          Latest
-        </h1>
-        <div className="flex md:justify-center justify-between items-center w-full gap-4 px-4">
-          <MobileNav categories={categories} />
-          <Search />
-        </div>
-      </div>
       {posts.length === 0 ? (
         <div className="flex flex-col justify-center items-center">
           <p>{`No results found for "${query}".`}</p>

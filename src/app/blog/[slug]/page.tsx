@@ -7,11 +7,28 @@ import Link from "next/link";
 import { UserAvatar } from "@/components/user/UserAvatar";
 import { Options } from "@/components/Options";
 import CommentsSection from "@/components/comments/CommentSection";
+import { Metadata } from "next";
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const slug = params.slug;
+
+  // fetch data
+  const post = await serverTrpc.post.view({ slug });
+
+  return {
+    title: post?.title || "Not Found",
+  };  
+}
 
 const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
   const post = await serverTrpc.post.view({ slug });
   const currentSession = await getAuthSession();
-  const isBlogOwner = currentSession?.user.id === post?.author.id
+  const isBlogOwner = currentSession?.user.id === post?.author.id;
 
   if (!post) {
     return null;
@@ -29,7 +46,7 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
           }}
         ></div>
         {/* Blog Header */}
-        <div className="p-4 pt-8 md:p-6">
+        <div className="p-4 md:pt-8 md:p-6">
           <div className="flex justify-between">
             <Link
               href="/"
@@ -43,9 +60,7 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
               />
               Back to Blog
             </Link>
-            {isBlogOwner && (
-              <Options slug={slug} />
-            )}
+            {isBlogOwner && <Options slug={slug} />}
           </div>
           <div className="w-full md:w-[calc(100%-350px)] mt-8 md:mt-16">
             <div className="flex flex-col gap-4 items-start md:items-center md:flex-row">
@@ -72,7 +87,7 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
           </div>
         </div>
         {/* Blog Layout */}
-        <div className="px-6 flex flex-col-reverse md:grid md:grid-cols-[1fr_340px]">
+        <div className="px-4 md:px-6 flex flex-col-reverse md:grid md:grid-cols-[1fr_340px]">
           <div className="pr-0 md:pr-20 pb-20 pt-8 md:pt-0 border-t md:border-t-0 md:border-r">
             <EditorOutput content={post.content} />
             {/* Comments */}

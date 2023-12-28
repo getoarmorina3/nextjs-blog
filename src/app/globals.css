@@ -71,6 +71,27 @@
   }
 }
 
+h1 {
+  font-size: 28px;
+  margin-top: 6px;
+  font-weight: 700;
+  line-height: 2.5rem;
+  letter-spacing: -0.049375rem;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+/* For medium-sized screens and larger */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.04em;
+  }
+}
+
 p a {
   color: var(--link-color);
 }

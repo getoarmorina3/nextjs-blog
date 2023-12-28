@@ -28,27 +28,33 @@ const style = {
   header: {
     h1: {
       fontWeight: "bold",
-      fontSize: "2.25rem",
+      fontSize: "3rem",
+      lineHeight: "1",
     },
     h2: {
       fontWeight: "bold",
-      fontSize: "2rem",
+      fontSize: "2.25rem",
+      lineHeight: "2.5rem",
     },
     h3: {
       fontWeight: "bold",
-      fontSize: "1.75rem",
+      fontSize: "1.875rem",
+      lineHeight: "2.25rem",
     },
     h4: {
       fontWeight: "bold",
       fontSize: "1.5rem",
+      lineHeight: "2rem",
     },
     h5: {
       fontWeight: "bold",
       fontSize: "1.25rem",
+      lineHeight: "1.75rem",
     },
     h6: {
       fontWeight: "bold",
-      fontSize: "1rem",
+      fontSize: "1.125rem",
+      lineHeight: "1.75rem",
     },
   },
 };

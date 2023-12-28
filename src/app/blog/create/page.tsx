@@ -1,5 +1,10 @@
 import { Editor } from '@/components/Editor'
 import { Button } from '@/components/ui/button'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Create Blog',
+};
 
 const page = async () => {
   return (
