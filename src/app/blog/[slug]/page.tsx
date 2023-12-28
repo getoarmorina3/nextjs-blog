@@ -66,7 +66,7 @@ const PostPage = async ({ params: { slug } }: { params: { slug: string } }) => {
                 )} - ${formatTimeToNow(new Date(post.createdAt))}`}
               </p>
             </div>
-            <h1 className="text-3xl md:text-5xl font-bold mt-6 leading-[1.25] mb-8 break-words">
+            <h1 className="text-[28px] md:text-5xl font-bold mt-6 md:leading-[1.25] leading-[2.5rem] tracking-[-.049375rem] md:tracking-[-.04em] mb-8 break-words">
               {post.title}
             </h1>
           </div>
