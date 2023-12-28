@@ -13,7 +13,7 @@ import { DeleteWarning } from "./DeleteWarning";
 export function Options({ slug }: { slug: string }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="border p-2 rounded-lg">
+      <DropdownMenuTrigger className="border border-ring p-2 rounded-lg">
         <MoreVertical />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
