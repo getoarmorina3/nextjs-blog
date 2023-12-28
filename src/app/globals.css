@@ -29,6 +29,8 @@
     --gradient-to: 255 0 128 / 0.15;
     --bg-gradient-from: 247 185 85;
     --bg-gradient-to: 255 0 128;
+    --link-color: #0070f3;
+
   }
 
   .dark {
@@ -55,6 +57,8 @@
     --gradient-to: 255 0 128 / 0.3;
     --bg-gradient-from: 247 185 85;
     --bg-gradient-to: 255 0 128;
+    --link-color: #3291ff;
+
   }
 }
 
@@ -66,4 +70,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+p a {
+  color: var(--link-color);
+}
+
+p a:hover {
+  background-image: linear-gradient(var(--link-color),var(--link-color));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
 }
