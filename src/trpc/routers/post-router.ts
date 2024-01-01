@@ -73,7 +73,7 @@ export const postRouter = router({
           },
           orderBy: [
             {
-              createdAt: 'desc',
+              createdAt: "desc",
             },
           ],
           include: {
@@ -109,7 +109,7 @@ export const postRouter = router({
         },
         include: {
           author: true,
-          Comment: true
+          Comment: true,
         },
       });
     }),
@@ -236,5 +236,36 @@ export const postRouter = router({
       });
 
       return true;
+    }),
+  // Only blog owners can edit a post
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        title: z
+          .string()
+          .min(10, { message: "Title must be at least 10 characters long" })
+          .max(100, { message: "Title must be less than 100 characters long" }),
+        content: z.any(),
+        categoryId: z.string().cuid({ message: "Category is required" }),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { title, content, categoryId } = input;
+      const slug = slugify(title, { lower: true });
+
+      const payload = await db.post.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          title,
+          content,
+          slug,
+          categoryId,
+        },
+      });
+
+      return payload;
     }),
 });

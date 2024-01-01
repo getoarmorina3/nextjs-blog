@@ -8,8 +8,11 @@ interface Category {
 
 export function SelectCategory({
   onSelectCategory,
+  defaultValue,
 }: {
   onSelectCategory: (categoryId: string) => void;
+  defaultValue: string | undefined;
+
 }) {
   const categories = trpc.category.listAll.useQuery();
 
@@ -20,7 +23,7 @@ export function SelectCategory({
       </label>
       <select
         onChange={(e) => onSelectCategory(e.target.value)}
-        defaultValue=""
+        defaultValue={defaultValue}
         id="category"
         name="categoryId"
         className="text-center block py-2.5 px-0 w-full text-sm text-muted-foreground bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 peer"

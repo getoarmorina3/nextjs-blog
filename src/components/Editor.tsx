@@ -14,52 +14,92 @@ interface EditorState {
   content: any;
 }
 
-export const Editor: React.FC = () => {
+interface EditorProps {
+  data?: any; // Optional data for editing
+}
+
+export const Editor: React.FC<EditorProps> = ({ data }) => {
   const [editorState, setEditorState] = useState<EditorState>({
-    title: "",
-    content: null,
+    title: data?.title || "",
+    content: data?.content || null,
   });
   const ref = useRef<EditorJS>();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(data?.categoryId || "");
 
-  const { mutate: createPost } = trpc.post.create.useMutation({
-    onSuccess: () => {
-      router.push("/");
-      router.refresh();
+  const { mutate: savePost } = data
+    ? trpc.post.update.useMutation({
+        onSuccess: () => {
+          router.push("/");
+          router.refresh();
 
-      return toast({
-        description: "Your blog has been published.",
-      });
-    },
-    onError: (error) => {
-      if (error?.data?.zodError?.fieldErrors) {
-        const fieldErrors = error.data.zodError.fieldErrors;
-        const errorMessages = Object.values(fieldErrors).flatMap(
-          (messages) => messages
-        );
+          return toast({
+            description: "Your blog has been updated.",
+          });
+        },
+        onError: (error) => {
+          if (error?.data?.zodError?.fieldErrors) {
+            const fieldErrors = error.data.zodError.fieldErrors;
+            const errorMessages = Object.values(fieldErrors).flatMap(
+              (messages) => messages
+            );
 
-        return toast({
-          title: "Blog was not published.",
-          description: (
-            <ul>
-              {errorMessages.map((message, index) => (
-                <li key={index}>{message}</li>
-              ))}
-            </ul>
-          ),
-          variant: "destructive",
-        });
-      }
-      return toast({
-        title: "Something went wrong.",
-        description: "Your blog could not be published. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+            return toast({
+              title: "Blog was not updated.",
+              description: (
+                <ul>
+                  {errorMessages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                  ))}
+                </ul>
+              ),
+              variant: "destructive",
+            });
+          }
+          return toast({
+            title: "Something went wrong.",
+            description: "Your blog could not be updated. Please try again.",
+            variant: "destructive",
+          });
+        },
+      }) // Use update mutation for editing
+    : trpc.post.create.useMutation({
+        onSuccess: () => {
+          router.push("/");
+          router.refresh();
+
+          return toast({
+            description: "Your blog has been published.",
+          });
+        },
+        onError: (error) => {
+          if (error?.data?.zodError?.fieldErrors) {
+            const fieldErrors = error.data.zodError.fieldErrors;
+            const errorMessages = Object.values(fieldErrors).flatMap(
+              (messages) => messages
+            );
+
+            return toast({
+              title: "Blog was not published.",
+              description: (
+                <ul>
+                  {errorMessages.map((message, index) => (
+                    <li key={index}>{message}</li>
+                  ))}
+                </ul>
+              ),
+              variant: "destructive",
+            });
+          }
+          return toast({
+            title: "Something went wrong.",
+            description: "Your blog could not be published. Please try again.",
+            variant: "destructive",
+          });
+        },
+      }); // Use create mutation for creating
 
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default;
@@ -79,7 +119,7 @@ export const Editor: React.FC = () => {
         },
         placeholder: "Type here to write your post...",
         inlineToolbar: true,
-        data: { blocks: [] },
+        data: data?.content || { blocks: [] },
         tools: {
           header: Header,
           list: List,
@@ -113,7 +153,7 @@ export const Editor: React.FC = () => {
         },
       });
     }
-  }, []);
+  }, [data]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -144,12 +184,14 @@ export const Editor: React.FC = () => {
     const blocks = await ref.current?.save();
 
     const payload = {
+      id: data?.id as string | undefined,
       title: editorState.title,
       content: blocks,
       categoryId: selectedCategoryId,
     };
 
-    createPost(payload);
+    // @ts-ignore
+    savePost(payload);
   };
 
   if (!isMounted) {
@@ -195,6 +237,7 @@ export const Editor: React.FC = () => {
               onSelectCategory={(categoryId) => {
                 setSelectedCategoryId(categoryId);
               }}
+              defaultValue={selectedCategoryId}
             />
           </div>
         </div>
