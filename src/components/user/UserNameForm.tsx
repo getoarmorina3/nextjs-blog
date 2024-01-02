@@ -48,6 +48,9 @@ export async function UserNameForm() {
               placeholder="Your username"
               className="w-fit md:w-[400px]"
               size={32}
+              required
+              minLength={3}
+              maxLength={32}
             />
           </div>
         </CardContent>
