@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ToggleGroupDemo } from "./ThemePreference";
 import { Icons } from "./ui/icons";
 import Link from "next/link";
